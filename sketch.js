@@ -1,21 +1,18 @@
 var PLAY = 1
 var END = 0
 var gameState = PLAY
-var player, player_running, player_collided
+var player
 var ground, invisibleGround, groundImage
-var obstaclesGroup, obstacle1, obstacle2, obstacle3, obstacle4, obstacle5, obstacle6
+var obstaclesGroup, obstacle1, obstacle2, obstacle3
 var score
 var gameOverImg,restartImg
-var jumpSound , checkPointSound, dieSound
+
 
 function preload(){
-  groundImage = loadImage("ground2.png")
-  obstacle1 = loadImage("obstacle1.png")
-  obstacle2 = loadImage("obstacle2.png")
-  obstacle3 = loadImage("obstacle3.png")
-  obstacle4 = loadImage("obstacle4.png")
-  obstacle5 = loadImage("obstacle5.png")
-  obstacle6 = loadImage("obstacle6.png")
+  BackgroundImage = loadImage("ground2.png")
+  obstacle1 = loadImage("obstacle.png")
+  obstacle2 = loadImage("obstacle.png")
+  obstacle3 = loadImage("obstacle.png")
   restartImg = loadImage("restart.png")
   gameOverImg = loadImage("gameOver.png")
 }
@@ -24,6 +21,7 @@ function setup() {
   createCanvas(600, 200)
   player = createSprite(50,160,20,50)
   player.scale = 0.8
+  player.addImage("player.png")
   ground = createSprite(200,180,400,20)
   ground.addImage("ground",groundImage)
   ground.x = ground.width /2
@@ -59,9 +57,7 @@ function draw() {
     player.velocityY = player.velocityY + 0.8     
     spawnObstacles()
     if(obstaclesGroup.isTouching(player)){    
-        jumpSound.play()
-        gameState = END
-        dieSound.play()   
+        gameState = END  
     }
   }
    else if (gameState === END) {
